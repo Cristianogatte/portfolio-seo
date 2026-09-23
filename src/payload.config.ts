@@ -7,6 +7,7 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Projects } from './collections/Projects'
+import { Media } from './collections/Media' // Importação que faltava para destravar a tela branca
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -17,12 +18,11 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
-    // Passo 2: Configuração para deixar o painel com a cara do seu projeto
     meta: {
       titleSuffix: '- Cristiano Gatte Portfolio',
     },
   },
-  collections: [Users, Projects],
+  collections: [Users, Projects, Media],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || '139b109a01923be1eedc1395',
   db: postgresAdapter({
