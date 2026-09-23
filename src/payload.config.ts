@@ -22,7 +22,7 @@ export default buildConfig({
   editor: lexicalEditor({}),
   secret: '139b109a01923be1eedc1395',
   db: postgresAdapter({
-    connectionString: 'postgresql://neondb_owner:npg_6GnCExto2AIp@ep-fragrant-mountain-b60tvra4-pooler.c-2.sa-east-1.aws.neon.tech/neondb?sslmode=require',
+    url: process.env.DATABASE_URI || 'postgresql://neondb_owner:npg_6GnCExto2AIp@ep-fragrant-mountain-b60tvra4-pooler.c-2.sa-east-1.aws.neon.tech/neondb?sslmode=require',
   }),
   sharp,
   typescript: {
