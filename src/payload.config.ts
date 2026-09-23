@@ -20,11 +20,11 @@ export default buildConfig({
   },
   collections: [Users, Projects],
   editor: lexicalEditor({}),
-  secret: '139b109a01923be1eedc1395',
+  secret: process.env.PAYLOAD_SECRET || '139b109a01923be1eedc1395',
   db: postgresAdapter({
-    client: {
-      connectionString: 'postgresql://neondb_owner:npg_6GnCExto2AIp@ep-fragrant-mountain-b60tvra4-pooler.c-2.sa-east-1.aws.neon.tech/neondb?sslmode=require',
-    }
+    pool: {
+      connectionString: process.env.DATABASE_URI || 'postgresql://neondb_owner:npg_6GnCExto2AIp@ep-fragrant-mountain-b60tvra4-pooler.c-2.sa-east-1.aws.neon.tech/neondb?sslmode=require',
+    },
   }),
   sharp,
   typescript: {
