@@ -17,6 +17,10 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    // Passo 2: Configuração para deixar o painel com a cara do seu projeto
+    meta: {
+      titleSuffix: '- Cristiano Gatte Portfolio',
+    },
   },
   collections: [Users, Projects],
   editor: lexicalEditor({}),
