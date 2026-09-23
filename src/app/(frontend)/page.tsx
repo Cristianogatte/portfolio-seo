@@ -3,14 +3,20 @@ import { getPayload } from 'payload'
 import config from '../../payload.config'
 
 export default async function HomePage() {
-  // Puxa o Payload de forma limpa e segura no servidor
-  const payload = await getPayload({ config })
-  
-  // Busca todos os projetos cadastrados por você no painel admin
-  const projectEntries = await payload.find({
-    collection: 'projects',
-    limit: 100,
-  })
+  let projects: any[] = []
+
+  // Trava de segurança Senior: Se o banco estiver vazio ou sem tabelas, o build NÃO quebra
+  try {
+    const payload = await getPayload({ config })
+    const projectEntries = await payload.find({
+      collection: 'projects',
+      limit: 100,
+    })
+    projects = projectEntries.docs || []
+  } catch (error) {
+    // Evita o erro 42P01 (Undefined Table) durante a primeira compilação na Vercel
+    projects = []
+  }
 
   const brands = ['CloudDevs', 'LatHire', 'BAsehit Marketing', 'Seven X']
 
@@ -53,7 +59,7 @@ export default async function HomePage() {
         </nav>
       </header>
 
-      {/* HERO SECTION & CALL TO ACTION */}
+      {/* HERO SECTION */}
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '80px 20px 40px 20px' }}>
         <div style={{ maxWidth: '800px', marginBottom: '60px' }}>
           <span style={{ color: '#00ffcc', fontSize: '14px', fontWeight: '700', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
@@ -111,12 +117,12 @@ export default async function HomePage() {
           </p>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '32px' }}>
-            {projectEntries.docs.length === 0 ? (
+            {projects.length === 0 ? (
               <div style={{ color: '#52525b', fontSize: '14px', fontStyle: 'italic' }}>
                 Nenhum projeto cadastrado ainda. Acesse o painel administrativo para criar o primeiro!
               </div>
             ) : (
-              projectEntries.docs.map((project) => (
+              projects.map((project: any) => (
                 <div key={project.id} style={{ background: '#141417', padding: '32px', borderRadius: '12px', border: '1px solid #27272a' }}>
                   <div style={{ backgroundColor: '#1e1b4b', color: '#818cf8', padding: '4px 10px', borderRadius: '4px', fontSize: '12px', fontWeight: '700', display: 'inline-block', marginBottom: '16px', textTransform: 'uppercase' }}>
                     {project.company}
