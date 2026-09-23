@@ -1,6 +1,8 @@
 import React from 'react'
 
 export default function HomePage() {
+  const niches = ['Roofing', 'HVAC', 'Solar', 'Painting', 'Flooring', 'Tile', 'Window Tinting', 'Cybersecurity']
+
   return (
     <div style={{
       backgroundColor: '#0a0a0c',
@@ -9,7 +11,7 @@ export default function HomePage() {
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       padding: '0 24px'
     }}>
-      {/* Header / Navegação */}
+      {/* Header */}
       <header style={{
         maxWidth: '1100px',
         margin: '0 auto',
@@ -30,8 +32,7 @@ export default function HomePage() {
             textDecoration: 'none',
             borderRadius: '6px',
             fontSize: '14px',
-            fontWeight: '6px',
-            transition: 'background 0.2s'
+            fontWeight: '6px'
           }}>
             Painel CMS
           </a>
@@ -57,7 +58,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* Métrica / Destaques de Autoridade */}
+        {/* Metricas */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
@@ -79,13 +80,13 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Seção de Nichos de Atuação */}
-        <section style={{ borderTop: '1px solid #1f2937', paddingCopy: '60px', paddingTop: '40px' }}>
+        {/* Nichos */}
+        <section style={{ borderTop: '1px solid #1f2937', paddingTop: '40px' }}>
           <h2 style={{ fontSize: '24px', fontWeight: '700', color: '#fff', marginBottom: '24px', letterSpacing: '-0.02em' }}>
             Proven Track Record in High-Competition Niches
           </h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-            {['Roofing', 'HVAC', 'Solar', 'Painting', 'Flooring', 'Tile', 'Window Tinting', 'Cybersecurity'].map((nicho) => (
+            {niches.map((nicho) => (
               <span key={nicho} style={{
                 backgroundColor: '#1f2937',
                 color: '#e5e7eb',
